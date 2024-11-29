@@ -1,16 +1,57 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Average Speed Calculation</title>
+  <script>
+    function aveSpd(upTime, upSpd, downSpd) {
+      // Convert the time to hours
+      let upTimeInHours = upTime / 60;
+      
+      // Calculate the distance for both uphill and downhill (distance = speed * time)
+      let distance = upSpd * upTimeInHours;
+
+      // Time taken for the downhill trip
+      let downTimeInHours = distance / downSpd;
+
+      // Total time for the entire journey (uphill time + downhill time)
+      let totalTimeInHours = upTimeInHours + downTimeInHours;
+
+      // Calculate the total distance (uphill + downhill)
+      let totalDistance = distance * 2;
+
+      // Calculate the average speed (total distance / total time)
+      let avgSpeed = totalDistance / totalTimeInHours;
+
+      // Return the average speed as an integer
+      return Math.floor(avgSpeed);
+    }
+
+    function calculateAverageSpeed() {
+      let upTime = parseInt(document.getElementById('upTime').value);
+      let upSpd = parseInt(document.getElementById('upSpd').value);
+      let downSpd = parseInt(document.getElementById('downSpd').value);
+      
+      let result = aveSpd(upTime, upSpd, downSpd);
+      document.getElementById('result').textContent = "Average Speed: " + result + " mph";
+    }
+  </script>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+  <h1>Average Speed Calculation</h1>
+  
+  <label for="upTime">Up Time (minutes):</label>
+  <input type="number" id="upTime" required><br><br>
 
+  <label for="upSpd">Uphill Speed (mph):</label>
+  <input type="number" id="upSpd" required><br><br>
+
+  <label for="downSpd">Downhill Speed (mph):</label>
+  <input type="number" id="downSpd" required><br><br>
+
+  <button onclick="calculateAverageSpeed()">Calculate Average Speed</button>
+
+  <p id="result"></p>
 </body>
-
 </html>
